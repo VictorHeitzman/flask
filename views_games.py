@@ -6,9 +6,10 @@ import time
 
 @app.route('/')
 def index():
-    listaDeJogos = Jogos.query.order_by(Jogos.id)
-    return render_template('index.html', titulo = 'Menos Cores', listaDeJogos = listaDeJogos)
-
+    if validaSessao():
+        listaDeJogos = Jogos.query.order_by(Jogos.id)
+        return render_template('index.html', titulo = 'Menos Cores', listaDeJogos = listaDeJogos)
+    return redirect(url_for('login'))
 @app.route('/novo')
 def novo():
     if validaSessao():
@@ -30,7 +31,7 @@ def editar(id):
         capa_jogo = recuperaImagem(id)
         return render_template('editar.html', titulo=f"Editar {jogo.nome}", id=id, capa_jogo=capa_jogo, form=form) 
     else:
-        return redirect(url_for('login', proxima_pagina=url_for('editar')))
+        return redirect(url_for('login'))
 
 @app.route('/uploads/<nome_arquivo>')
 def uploads(nome_arquivo):
@@ -100,9 +101,8 @@ def intermed_editar():
 
         arquivo     = request.files['arquivo']
         upload_path = app.config['UPLOAD_PATH']
-        timestemp = time.time()
         deletaArquivo(jogo.id)
-        arquivo.save(f'{upload_path}/capa{jogo.id}-{timestemp}.jpg')
+        arquivo.save(f'{upload_path}/capa{jogo.id}-{jogo.nome}.jpg')
     
     return redirect(url_for('index'))
 
