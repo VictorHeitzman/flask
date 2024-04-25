@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<form action="{{ url_for('intermed_novoUser') }}" method="post">
+    
+    <fieldset>
+        {{ form.csrf_token() }}
+        <div class="form-group">
+            {{ form.nome.label(class='form-label') }}
+            {{ form.nome(class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form.senha.label(class='form-label') }}
+            {{ form.senha(class='form-control') }}
+        </div>
+        <br>
+        <div>
+            {{ form.login(class='btn btn-primary btn-salvar') }}
+            <button type="button" class="btn btn-primary btn-salvar">
+                <a style="color: white; text-decoration: none;" href="{{ url_for('login') }}">Voltar</a>
+            </button>
+        </div>
+    </fieldset>
+</form>
+
+
+{% endblock %}

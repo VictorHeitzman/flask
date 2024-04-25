@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('intermed_criar') }}" method="post" enctype="multipart/form-data">
+    
+    <figure class="img-thumbnail col-md-4">
+        <img class="img-fluid" src="{{ url_for('uploads', nome_arquivo='capa_padrao.jpg') }}" alt="">
+        <figcaption>
+            <label class="fileContainer">
+                <input type="file" name="arquivo" accept=".jpg" hidden>
+                    Inserir capa
+            </label>
+        </figcaption>
+    </figure>
+    
+    <fieldset>
+        {{ form.csrf_token() }}
+        <div class="form-group">
+            {{ form.nome.label(class='form-label') }}
+            {{ form.nome(class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form.categoria.label(class='form-label') }}
+            {{ form.categoria(class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form.console.label(class='form-label') }}
+            {{ form.console(class='form-control') }}
+        </div>
+        <br>
+        <div>
+            {{ form.salvar(class='btn btn-primary btn-salvar') }}
+            <button type="button" class="btn btn-primary btn-salvar">
+                <a style="color: white; text-decoration: none;" href="/intermed_logout">Log Out</a>
+            </button>
+            <button type="button" class="btn btn-primary btn-salvar">
+                <a style="color: white; text-decoration: none;" href="{{ url_for('index') }}">Voltar</a>
+            </button>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
