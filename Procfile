@@ -1,1 +1,1 @@
-web: jogotecaapp.py
+web: python jogoteca.py
