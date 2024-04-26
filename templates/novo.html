@@ -1,18 +1,18 @@
 {% extends "template.html" %}
 {% block conteudo %}
-<form action="{{ url_for('intermed_criar') }}" method="post" enctype="multipart/form-data">
+<form class="display" action="{{ url_for('intermed_criar') }}" method="post" enctype="multipart/form-data">
     
-    <figure class="img-thumbnail">
-        <img style="width: 100%" src="{{ url_for('uploads', nome_arquivo='capa_padrao.jpg') }}" alt="">
-        <figcaption>
-            <label>
+    <figure class="img-thumbnail distance">
+        <figcaption >
+            <label >
                 <input type="file" name="arquivo" accept=".jpg" hidden>
-                Inserir capa
+                <img  style="width: 500px" src="{{ url_for('uploads', nome_arquivo='capa_padrao.jpg') }}" alt="">
+                <p>Inserir capa</p>
             </label>
         </figcaption>
     </figure>
     
-    <fieldset>
+    <fieldset class="distance">
         {{ form.csrf_token() }}
         <div class="form-group">
             {{ form.nome.label(class='form-label') }}

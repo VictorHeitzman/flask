@@ -6,3 +6,17 @@
 .icon:hover {
     width: 40px;
 }
+
+.display{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.distance{
+    margin: 15px;
+}
+
+.tamanho-image{
+    width: 900px;
+}

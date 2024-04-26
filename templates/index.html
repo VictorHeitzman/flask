@@ -22,7 +22,7 @@
 
 <section style="display:flex; flex-wrap: wrap; justify-content: center;">
    {% for jogo in listaDeJogos %}
-   <div class="card" style="width: 18rem; margin: 15px;">
+   <div class="card" style="width: 18rem; margin: 15px;" onclick="">
       <img class="card-img-top" src="/uploads/capa{{jogo.id}}-{{jogo.nome}}.jpg" alt="Card image cap">
       <div class="card-body">
          <h5 class="card-title">{{ jogo.nome }}</h5>
