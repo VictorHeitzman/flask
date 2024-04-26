@@ -3,10 +3,10 @@
 <form class="display" action="{{ url_for('intermed_editar') }}" method="post" enctype="multipart/form-data">
 
     <figure class="img-thumbnail distance">
-        <figcaption>
+        <figcaption class="figure-caption">
             <label>
                 <input type="file" name="arquivo" accept=".jpg" hidden>
-                <img style="width: 500px" src="{{ url_for('uploads', nome_arquivo=capa_jogo) }}" alt="">
+                <img class="img-fluid rounded" style="width: 500px" src="{{ url_for('uploads', nome_arquivo=capa_jogo) }}" alt="">
                 <p>Mudar capa</p>
             </label>
         </figcaption>
