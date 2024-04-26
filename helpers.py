@@ -14,6 +14,11 @@ class FormularioUsuario(FlaskForm):
     senha       = PasswordField('Senha',        [validators.DataRequired(), validators.length(min=1, max=50)])
     login       = SubmitField('Login')
 
+class FormularioPesquisaJogo(FlaskForm):
+    nomeJogo    = StringField('', [validators.DataRequired()])
+    pesquisar   = SubmitField('Pesquisar')
+    
+    
 def validaSessao():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return False

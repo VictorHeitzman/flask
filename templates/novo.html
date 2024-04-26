@@ -2,12 +2,12 @@
 {% block conteudo %}
 <form action="{{ url_for('intermed_criar') }}" method="post" enctype="multipart/form-data">
     
-    <figure class="img-thumbnail col-md-4">
-        <img class="img-fluid" src="{{ url_for('uploads', nome_arquivo='capa_padrao.jpg') }}" alt="">
+    <figure class="img-thumbnail">
+        <img style="width: 100%" src="{{ url_for('uploads', nome_arquivo='capa_padrao.jpg') }}" alt="">
         <figcaption>
-            <label class="fileContainer">
+            <label>
                 <input type="file" name="arquivo" accept=".jpg" hidden>
-                    Inserir capa
+                Inserir capa
             </label>
         </figcaption>
     </figure>

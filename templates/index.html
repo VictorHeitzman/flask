@@ -1,6 +1,7 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
+
 <button type="button" class="btn btn-primary btn-salvar">
    <a style="color: white; text-decoration: none" href="{{ url_for('novo')}}">Adicionar Jogo</a>
 </button>
@@ -8,6 +9,16 @@
    <a style="color: white; text-decoration: none;" href="{{ url_for('intermed_logout') }}">Log Out</a>
 </button>
 <br><br>
+
+<form action="{{ url_for('intermed_pesquisaJogo') }}" method="post">
+   {{ form.csrf_token() }}
+   <div class="input-group">
+      
+      {{ form.nomeJogo(class='form-control', placeholder='Pesquisar Jogo')}}
+      {{ form.pesquisar(class='btn btn-outline-secondary') }}
+      <a class="btn btn-outline-secondary" href="{{ url_for('index') }}">Limpar</a>
+   </div>
+</form>
 
 <section style="display:flex; flex-wrap: wrap; justify-content: center;">
    {% for jogo in listaDeJogos %}
@@ -21,8 +32,8 @@
          <li class="list-group-item"><strong>Console: </strong> {{ jogo.console }}</li>
       </ul>
       <div class="card-body">
-         <a href="{{ url_for('editar',            id=jogo.id) }}"><img width="30" height="30" src="https://img.icons8.com/dusk/64/pencil--v2.png" alt="pencil--v2"/></a>
-         <a href="{{ url_for('intermed_deletar',  id=jogo.id) }}"><img width="30" height="30" src="https://img.icons8.com/stickers/100/delete-forever.png" alt="delete-forever"/></a>
+         <a href="{{ url_for('editar',            id=jogo.id) }}"><img class="icon" src="https://img.icons8.com/dusk/64/pencil--v2.png" alt="pencil--v2"/></a>
+         <a href="{{ url_for('intermed_deletar',  id=jogo.id) }}"><img class="icon" src="https://img.icons8.com/stickers/100/delete-forever.png" alt="delete-forever"/></a>
       </div>
    </div>
    {% endfor %}

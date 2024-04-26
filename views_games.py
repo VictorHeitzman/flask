@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for, send_from_directory
 from jogoteca import app, db
 from models import Jogos
-from helpers import FormularioJogo, validaSessao, recuperaImagem, deletaArquivo
+from helpers import FormularioJogo, validaSessao, recuperaImagem, deletaArquivo, FormularioPesquisaJogo
 import time
 
 @app.route('/')
 def index():
     if validaSessao():
-        listaDeJogos = Jogos.query.order_by(Jogos.id)
-        return render_template('index.html', titulo = 'Menos Cores', listaDeJogos = listaDeJogos)
+        form    = FormularioPesquisaJogo()
+        listaDeJogos = Jogos.query.order_by(Jogos.nome)
+        return render_template('index.html', titulo = 'Lista de Jogos', listaDeJogos = listaDeJogos, form=form)
     return redirect(url_for('login'))
 @app.route('/novo')
 def novo():
@@ -46,7 +47,6 @@ def uploads(nome_arquivo):
 def intermed_recuperaJogo(id):
     return recuperaImagem(id)
 
-
 @app.route('/intermed_criar', methods=app.config['METHODS'])
 def intermed_criar():
     form = FormularioJogo(request.form)
@@ -61,7 +61,7 @@ def intermed_criar():
     jogo = Jogos.query.filter_by(nome=nome).first()
 
     if jogo:
-        flash('Jogo já existente')
+        flash('Jogo já existente', 'danger')
         return redirect(url_for('index'))
 
     novo_jogo = Jogos(nome = nome, categoria = categoria, console = console)
@@ -77,14 +77,14 @@ def intermed_criar():
 @app.route('/intermed_logout')
 def intermed_logout():
     session['usuario_logado'] = None
-    flash('Logout efetuado com sucesso!')
+    flash('Logout efetuado com sucesso!', 'success')
     return redirect(url_for('login'))
 
 @app.route('/intermed_deletar/<int:id>')
 def intermed_deletar(id):
     jogo        = Jogos.query.filter_by(id=id).delete()
     db.session.commit()
-    flash('Jogo Deletado!')
+    flash('Jogo Deletado!','info')
     return redirect(url_for('index'))
 
 @app.route('/intermed_editar', methods=app.config['METHODS'])
@@ -107,4 +107,14 @@ def intermed_editar():
     return redirect(url_for('index'))
 
 
+@app.route('/intermed_pesquisaJogo', methods=app.config['METHODS'])
+def intermed_pesquisaJogo():
+    form    = FormularioPesquisaJogo(request.form)
 
+    nomeJogo    = form.nomeJogo.data
+    listaDeJogos = Jogos.query.filter(Jogos.nome.like("%{}%".format(nomeJogo))).all()
+    return render_template('index.html', titulo= 'Lista de Jogos', listaDeJogos=listaDeJogos, form=FormularioPesquisaJogo())
+
+@app.route('/teste/<variavel>')
+def teste(variavel):
+    return render_template('teste.html', titulo=variavel)

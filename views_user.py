@@ -28,26 +28,25 @@ def intermed_novoUser():
     if  not novo_usuario:
         db.session.add(Usuarios(nome=nome, senha=senha))
         db.session.commit()
-        flash('Usuario Adicionado com sucesso!')
+        flash('Usuario Adicionado com sucesso!', 'success')
         return redirect('login')
-    flash('Usuario já adicionado, tente outro!')
+    flash('Usuario já adicionado, tente outro!', 'danger')
     return redirect('adicionar')
 
 @app.route('/intermed_autenticar', methods=app.config['METHODS'])
 def intermed_autenticar():
     form = FormularioUsuario(request.form)
     usuario = Usuarios.query.filter_by(nome = form.nome.data).first()
-    if usuario:
-        if form.senha.data == usuario.senha:
-            session['usuario_logado'] = usuario.nome
-            flash(usuario.nome +' logado com sucesso!')
-            proxima_pagina = request.form['proxima_pagina'].replace("/","")
+    if usuario and form.senha.data == usuario.senha:
+        session['usuario_logado'] = usuario.nome
+        flash(usuario.nome +' logado com sucesso!', 'success')
+        proxima_pagina = request.form['proxima_pagina'].replace("/","")
         if proxima_pagina != 'None':
             return redirect(url_for(proxima_pagina))
         else: 
             return redirect(url_for('index'))
     else:
-        flash('Usuario não logado!')
+        flash('Usuario não logado!', 'danger')
         return redirect(url_for('login'))
     
 
