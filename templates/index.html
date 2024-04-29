@@ -33,11 +33,27 @@
       </ul>
       <div class="card-body">
          <a href="{{ url_for('editar',            id=jogo.id) }}"><img class="icon" src="https://img.icons8.com/dusk/64/pencil--v2.png" alt="pencil--v2"/></a>
-         <a href="{{ url_for('intermed_deletar',  id=jogo.id) }}"><img class="icon" src="https://img.icons8.com/stickers/100/delete-forever.png" alt="delete-forever"/></a>
+         <a href="{{ url_for('musica_pelo_id',    id=jogo.id) }}"><img class="icon" src="https://img.icons8.com/stickers/100/delete-forever.png" alt="delete-forever"/></a>
       </div>
    </div>
    {% endfor %}
 </section>
 
+{% if joguinho != undefined %}
+   <section class="modal">
+      <div id="card">
+         <a href="/"><i class="fa-solid fa-xmark" id="fechar"></i></a>
+         <h2>Confirmação</h2>
+         <hr>
+
+         <p>Confirma deletar jogo <strong>{{ joguinho.nome }}?</strong></p>
+
+         <div id="btns">
+            <a class="btnConfirmacao" href="{{ url_for('intermed_deletar',  id=joguinho.id) }}">Confirma</a>
+            <a class="btnConfirmacao" href="/">Cancelar</a>
+         </div>
+      </div>
+   </section>
+{% endif %}
 
 {% endblock %}

@@ -20,3 +20,71 @@
 .tamanho-image{
     width: 900px;
 }
+
+/* Estilo Modal */
+section.modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #00000080;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+#card{
+    margin: 15%;
+    width: 30rem;
+    position: relative;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+section h2 {
+    padding: 0;
+    margin: 0;
+}
+
+#fechar{
+    padding: 1.5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#fechar:hover{
+    color: blueviolet;
+}
+
+#btns{
+    display: flex;
+    justify-content: center;
+}
+
+section p{
+    padding: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.btnConfirmacao{
+    background-color: #fff;
+    border: solid 1px blueviolet;
+    text-decoration: none;
+    margin-right: 1rem;
+    text-align: center;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.btnConfirmacao:hover{
+    background-color: blue;
+    color: #fff;
+    transition: all 0.5s;
+}

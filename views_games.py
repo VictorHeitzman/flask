@@ -11,6 +11,7 @@ def index():
         listaDeJogos = Jogos.query.order_by(Jogos.nome)
         return render_template('index.html', titulo = 'Lista de Jogos', listaDeJogos = listaDeJogos, form=form)
     return redirect(url_for('login'))
+
 @app.route('/novo')
 def novo():
     if validaSessao():
@@ -38,6 +39,12 @@ def editar(id):
 def uploads(nome_arquivo):
     return send_from_directory('uploads', nome_arquivo)
 
+@app.route('/musica_pelo_id/<int:id>')
+def musica_pelo_id(id):
+    form    = FormularioPesquisaJogo()
+    jogo    = Jogos.query.get(id)
+    listaDeJogos = Jogos.query.order_by(Jogos.nome)
+    return render_template('index.html', joguinho=jogo, form=form, titulo="Lista de Jogos", listaDeJogos = listaDeJogos)
 
 ##################################################
 # FUNCTIONS INTERMEDIARIAS
