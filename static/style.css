@@ -88,3 +88,27 @@ section p{
     color: #fff;
     transition: all 0.5s;
 }
+
+/* Estilo da figura que carrega o jogo */
+
+.figura{
+    border-top: solid 1px black;
+
+    border-radius: 10px;
+}
+
+.img-figura{
+    border-radius: 10px;
+    padding: 5px ;
+}
+
+.figura p{
+    border-bottom: solid 1px black;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.img-tamanho{
+    width: 400px;
+}
